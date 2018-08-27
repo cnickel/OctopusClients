@@ -158,17 +158,17 @@ namespace Octopus.Client.Repositories
 
         public void Rerun(TaskResource resource)
         {
-            Client.Post(resource.Link("Rerun"), (TaskResource)null);
+            Client.Post(resource.Link("Rerun"), resource);
         }
 
         public void Cancel(TaskResource resource)
         {
-            Client.Post(resource.Link("Cancel"), (TaskResource)null);
+            Client.Post(resource.Link("Cancel"), resource);
         }
 
         public void ModifyState(TaskResource resource, TaskState newState, string reason)
         {
-            Client.Post(resource.Link("State"), new { state = newState, reason = reason });
+            Client.Post(resource.Link("State"), new { state = newState, reason = reason, SpaceId = resource.SpaceId});
         }
 
         public IReadOnlyList<TaskResource> GetQueuedBehindTasks(TaskResource resource)
